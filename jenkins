@@ -1,0 +1,29 @@
+node
+{
+    def mavenHome = tool name: "maven3.8.4"
+    stage('Checkoutcode')
+    {
+        git branch: 'development', credentialsId: 'e3ab6c02-fd1a-42d9-99f4-1d5e4be20e73', url: 'https://github.com/mithuntechnologies4123/maven-web-application.git'
+    }
+    stage('Build'){
+        sh "${mavenHome}/bin/mvn clean package"
+    }
+    stage('SonarQubeReport'){
+        sh "${mavenHome}/bin/mvn clean sonar:sonar"
+    }
+    stage('UploadArtifactinto Nexus'){
+        sh "${mavenHome}/bin/mvn clean deploy"
+    }
+    stage('DeployAppintoTomcat'){
+        sshagent(['d857018f-d9c0-4a13-af72-202e2eff5a9c']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@15.206.169.214:/opt/apache-tomcat-9.0.56/webapps/"
+        }  
+        
+}
+stage('send Notifications'){
+    emailext body: '''Build Over..
+ 
+Regards
+M Ramanachary''', subject: '', to: 'ramana.mittapelli@gmail.com, mvramulu811@gmail.com, navyabandarupalli@gmail.com'
+}
+}
