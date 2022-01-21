@@ -20,11 +20,11 @@ node
         }  
         
 }
-/* stage('send Notifications'){
+stage('send Notifications'){
     emailext body: '''Build Over..
  
 Regards
 M Ramanachary''', subject: '', to: 'ramana.mittapelli@gmail.com, mvramulu811@gmail.com, navyabandarupalli@gmail.com'
-} */
+}
 
 }
