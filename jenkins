@@ -14,13 +14,13 @@ node
      stage('UploadArtifactinto Nexus'){
         sh "${mavenHome}/bin/mvn clean deploy"
     }
-    /* stage('DeployAppintoTomcat'){
+    stage('DeployAppintoTomcat'){
         sshagent(['d857018f-d9c0-4a13-af72-202e2eff5a9c']) {
     sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@15.206.169.214:/opt/apache-tomcat-9.0.56/webapps/"
         }  
         
 }
-stage('send Notifications'){
+/* stage('send Notifications'){
     emailext body: '''Build Over..
  
 Regards
