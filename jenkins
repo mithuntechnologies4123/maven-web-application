@@ -8,7 +8,7 @@ node
     stage('Build'){
         sh "${mavenHome}/bin/mvn clean package"
     }
-    stage('SonarQubeReport'){
+   /* stage('SonarQubeReport'){
         sh "${mavenHome}/bin/mvn clean sonar:sonar"
     }
     stage('UploadArtifactinto Nexus'){
@@ -25,6 +25,6 @@ stage('send Notifications'){
  
 Regards
 M Ramanachary''', subject: '', to: 'ramana.mittapelli@gmail.com, mvramulu811@gmail.com, navyabandarupalli@gmail.com'
-}
+} */
 
 }
